@@ -1,0 +1,21 @@
+<?php
+// .htaccess - إعدادات Apache
+?>
+RewriteEngine On
+
+# حماية الملفات الحساسة
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# حماية ملفات قاعدة البيانات
+<FilesMatch "\.(sqlite|sqlite3|db)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# إعادة كتابة الروابط
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
